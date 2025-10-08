@@ -1,15 +1,42 @@
-version: '3.8'
+# version: '3.8'
 
 services:
-  app:
-    build: .
-    container_name: ci3_app
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: ci3_web
     ports:
       - "8085:80"
     volumes:
-      - ./app:/var/www/html
+      - ./web:/var/www/html
     depends_on:
       - db
+      - api
+      - websocket
+    networks:
+      - ci3net
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: ci3_api
+    ports:
+      - "8086:80"
+    volumes:
+      - ./api:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - ci3net
+
+  websocket:
+    build:
+      context: ./websocket
+    container_name: ci3_websocket
+    ports:
+      - "8080:8080"
     networks:
       - ci3net
 
@@ -26,20 +53,6 @@ services:
       - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
-    networks:
-      - ci3net
-  migrate:
-    image: mysql:5.7
-    depends_on:
-      - db
-    entrypoint: [ "sh", "-c", "./scripts/migrate.sh" ]
-    environment:
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-    volumes:
-      - ./migrations:/migrations
-      - ./scripts:/scripts
     networks:
       - ci3net
 
