@@ -5,12 +5,12 @@ class Messaging extends MY_Controller {
 
     public function index($user_id, $chat_id)
     {
+		$messages = $this->test_api->get('index.php/messages_api/messages', array('chat_id' => $chat_id));
+
         $data['user_id'] = $user_id;
         $data['chat_id'] = $chat_id;
-        // Load messages for that chat
-		$messages = $this->test_api->get('index.php/messages_api/messages');
-        echo json_encode($this->test_api->debug());
+        $data['messages'] = $messages;
 
-        // $this->load->view('messaging_view', $data);
+        $this->load->view('messaging_view', $data);
     }
 }

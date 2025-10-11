@@ -9,7 +9,7 @@ class MY_Controller extends CI_Controller {
 	{
 		parent::__construct();
 		$app_server_api = array(
-			'server' => 'http://localhost:8086/',
+			'server' => 'http://api/',
 			'api_key' => 'REST API',
 			'api_name' => 'X-API-KEY',
 			'http_user' => '',
