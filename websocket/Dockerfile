@@ -1,23 +1,9 @@
-FROM php:7.4-cli
+FROM php:8.2-cli
 
-WORKDIR /var/www/websocket
+WORKDIR /app
 
-# Install system dependencies and Composer safely
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    curl \
-    && curl -sS https://getcomposer.org/installer -o composer-setup.php \
-    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
-    && rm composer-setup.php \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install git and unzip (in case you ever need to run composer manually)
+RUN apt-get update && apt-get install -y git unzip
 
-# Copy project files
-COPY . .
-
-# Install Ratchet via Composer
-RUN composer require cboden/ratchet
-
-EXPOSE 8080
-
+# We no longer run composer install here, since vendor/ is mounted from the host
 CMD ["php", "server.php"]
