@@ -13,9 +13,10 @@
 </div>
 
 <script>
-const ws = new WebSocket("ws://localhost:8080");
+const ws = new WebSocket("ws://72.60.210.22:8080");
 
 ws.onopen = () => {
+  alert("WebSocket connected!");
   console.log("Connected to WebSocket");
   ws.send(JSON.stringify({
       chat_id: <?= $chat_id ?>,
@@ -24,6 +25,8 @@ ws.onopen = () => {
       message: ''
   }));
 };
+
+ws.onerror = () => alert("WebSocket failed to connect.");
 
 ws.onmessage = (event) => {
   console.log({event});
