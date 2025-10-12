@@ -26,6 +26,13 @@ services:
       - "8086:80"
     volumes:
       - ./api:/var/www/html
+      - ./scripts:/var/www/html/scripts
+      - ./migrations:/var/www/html/migrations
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_HOST=ci3_db
     depends_on:
       - db
     networks:
@@ -37,6 +44,8 @@ services:
     container_name: ci3_websocket
     ports:
       - "8080:8080"
+    volumes:
+    - ./websocket:/app 
     networks:
       - ci3net
 

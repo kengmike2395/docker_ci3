@@ -25,7 +25,7 @@ mysql -h db -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" <<-EOSQL
 EOSQL
 
 # Sort files and loop through
-FILES=$(find /migrations -name '*.sql' | sort)
+FILES=$(find ./migrations -name '*.sql' | sort)
 
 for file in $FILES; do
   filename=$(basename "$file")

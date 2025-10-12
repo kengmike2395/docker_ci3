@@ -53,3 +53,4 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['messaging/(:num)/(:num)'] = 'messaging/index/$1/$2';
+$route['messaging/send'] = 'messaging/send_message';
