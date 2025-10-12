@@ -25,7 +25,7 @@ mysql -h $MYSQL_HOST -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" --ssl=0 "$MYSQL_DATABAS
 EOSQL
 
 # Sort files and loop through
-FILES=$(find ./migrations -name '*.sql' | sort)
+FILES=$(find ../migrations -name '*.sql' | sort)
 
 for file in $FILES; do
   filename=$(basename "$file")
