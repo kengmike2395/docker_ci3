@@ -13,6 +13,7 @@
  * @link			https://github.com/chriskacerguis/codeigniter-restserver
  * @version         3.0.0-pre
  */
+#[\AllowDynamicProperties]
 abstract class REST_Controller extends CI_Controller
 {
     // Note: Only the widely used HTTP status codes are documented
@@ -484,7 +485,7 @@ abstract class REST_Controller extends CI_Controller
 
         $pattern = '/^(.*)\.('.implode('|', array_keys($this->_supported_formats)).')$/';
         $matches = array();
-        if (preg_match($pattern, $object_called, $matches)) {
+        if (preg_match($pattern, $object_called ?? '', $matches)) {
             $object_called = $matches[1];
         }
 
@@ -693,12 +694,12 @@ abstract class REST_Controller extends CI_Controller
 
         // Check if a file extension is used when no get arguments provided
         $matches = array();
-        if (!$this->_get_args and preg_match($pattern, $this->uri->uri_string(), $matches)) {
+        if (!$this->_get_args and preg_match($pattern, $this->uri->uri_string() ?? '', $matches)) {
             return $matches[1];
         }
 
         // Check if a file extension is used
-        elseif ($this->_get_args and !is_array(end($this->_get_args)) and preg_match($pattern, end($this->_get_args), $matches)) {
+        elseif ($this->_get_args and !is_array(end($this->_get_args)) and preg_match($pattern, end($this->_get_args) ?? '', $matches)) {
             // The key of the last argument
             $last_key = end(array_keys($this->_get_args));
 
@@ -1077,7 +1078,7 @@ abstract class REST_Controller extends CI_Controller
         }
 
         // Grab proper GET variables
-        parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $get);
+        parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) ?? '', $get);
 
         // Merge both the URI segments and GET params
         $this->_get_args = array_merge($this->_get_args, $get);
@@ -1105,7 +1106,7 @@ abstract class REST_Controller extends CI_Controller
 
         // If no file type is provided, this is probably just arguments
         else {
-            parse_str(file_get_contents('php://input'), $this->_put_args);
+            parse_str(file_get_contents('php://input') ?? '', $this->_put_args);
         }
 
     }
@@ -1116,7 +1117,7 @@ abstract class REST_Controller extends CI_Controller
     protected function _parse_head()
     {
         // Grab proper HEAD variables
-        parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $head);
+        parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) ?? '', $head);
 
         // Merge both the URI segments and HEAD params
         $this->_head_args = array_merge($this->_head_args, $head);
@@ -1128,7 +1129,7 @@ abstract class REST_Controller extends CI_Controller
     protected function _parse_options()
     {
         // Grab proper OPTIONS variables
-        parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $options);
+        parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) ?? '', $options);
 
         // Merge both the URI segments and OPTIONS params
         $this->_options_args = array_merge($this->_options_args, $options);
@@ -1146,7 +1147,7 @@ abstract class REST_Controller extends CI_Controller
 
         // If no file type is provided, this is probably just arguments
         else {
-            parse_str(file_get_contents('php://input'), $this->_patch_args);
+            parse_str(file_get_contents('php://input') ?? '', $this->_patch_args);
         }
     }
 
@@ -1156,7 +1157,7 @@ abstract class REST_Controller extends CI_Controller
     protected function _parse_delete()
     {
         // Set up out DELETE variables (which shouldn't really exist, but sssh!)
-        parse_str(file_get_contents('php://input'), $this->_delete_args);
+        parse_str(file_get_contents('php://input') ?? '', $this->_delete_args);
     }
 
     // INPUT FUNCTION --------------------------------------------------------------

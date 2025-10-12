@@ -12,6 +12,7 @@
  * @license         http://philsturgeon.co.uk/code/dbad-license
  * @link			http://philsturgeon.co.uk/code/codeigniter-curl
  */
+#[\AllowDynamicProperties]
 class Curl {
 
 	protected $_ci;                 // CodeIgniter instance
@@ -59,7 +60,7 @@ class Curl {
 		if ($method === 'get')
 		{
 			// If a URL is provided, create new session
-			$this->create($url.($params ? '?'.http_build_query($params, NULL, '&') : ''));
+			$this->create($url.($params ? '?'.http_build_query($params, '', '&') : ''));
 		}
 
 		else
@@ -117,7 +118,7 @@ class Curl {
 		// If its an array (instead of a query string) then format it correctly
 		if (is_array($params))
 		{
-			$params = http_build_query($params, NULL, '&');
+			$params = http_build_query($params, '', '&');
 		}
 
 		// Add in the specific options provided
@@ -134,7 +135,7 @@ class Curl {
 		// If its an array (instead of a query string) then format it correctly
 		if (is_array($params))
 		{
-			$params = http_build_query($params, NULL, '&');
+			$params = http_build_query($params, '', '&');
 		}
 
 		// Add in the specific options provided
@@ -152,7 +153,7 @@ class Curl {
 		// If its an array (instead of a query string) then format it correctly
 		if (is_array($params))
 		{
-			$params = http_build_query($params, NULL, '&');
+			$params = http_build_query($params, '', '&');
 		}
 
 		// Add in the specific options provided
@@ -170,7 +171,7 @@ class Curl {
 		// If its an array (instead of a query string) then format it correctly
 		if (is_array($params))
 		{
-			$params = http_build_query($params, NULL, '&');
+			$params = http_build_query($params, '', '&');
 		}
 
 		// Add in the specific options provided
@@ -185,7 +186,7 @@ class Curl {
 	{
 		if (is_array($params))
 		{
-			$params = http_build_query($params, NULL, '&');
+			$params = http_build_query($params, '', '&');
 		}
 
 		$this->option(CURLOPT_COOKIE, $params);
