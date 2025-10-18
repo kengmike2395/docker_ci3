@@ -13,7 +13,7 @@ services:
     depends_on:
       - db
       - api
-      - websocket
+      # - websocket
     networks:
       - ci3net
 
@@ -38,16 +38,16 @@ services:
     networks:
       - ci3net
 
-  websocket:
-    build:
-      context: ./websocket
-    container_name: ci3_websocket
-    ports:
-      - "8080:8080"
-    volumes:
-    - ./websocket:/app 
-    networks:
-      - ci3net
+  # websocket:
+  #   build:
+  #     context: ./websocket
+  #   container_name: ci3_websocket
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #   - ./websocket:/app 
+  #   networks:
+  #     - ci3net
 
   db:
     image: mysql:8.0

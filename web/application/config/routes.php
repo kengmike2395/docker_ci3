@@ -54,3 +54,9 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['messaging/(:num)/(:num)'] = 'messaging/index/$1/$2';
 $route['messaging/send'] = 'messaging/send_message';
+
+// include all routing files in config/routing/*
+$files = glob(APPPATH.'config/routing/*.php');
+foreach ($files as $file) {
+    include $file;
+}

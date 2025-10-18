@@ -1,0 +1,1 @@
+<h1>admin_courses_view</h1>

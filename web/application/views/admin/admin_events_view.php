@@ -1,0 +1,1 @@
+<h1>admin_events_view</h1>
