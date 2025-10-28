@@ -1,3 +1,36 @@
-body {
-    background-color: green;
+.header {
+	background-color: var(--secondary-bg-color);
+
+	&_nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&_logo {
+			img {
+				width: 7rem;
+				height: auto;
+			}
+		}
+
+		&_buttons {
+			display: flex;
+			gap: 10px;
+
+			button {
+				font-weight: 800;
+				font-size: 10px;
+				padding: 13px;
+				cursor: pointer;
+				border: none;
+				border-radius: 7px;
+				background-color: white;
+				letter-spacing: 0.8px;
+			}
+
+			.header__nav_login-btn {
+				background-color: var(--primary-accent-color);
+			}
+		}
+	}
 }

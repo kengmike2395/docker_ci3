@@ -1,0 +1,31 @@
+:root {
+	--primary-bg-color: #fefae8;
+	--secondary-bg-color: #f6f4f4;
+
+	--primary-accent-color: #f5b317;
+
+	--font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+	--banner-color-1: #c67708;
+	--banner-color-2: #f5b317;
+	--banner-color-3: #fdf3c4;
+
+	--primary-text-color: #161212;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+	color: var(--primary-text-color);
+
+}
